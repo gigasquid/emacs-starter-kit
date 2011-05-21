@@ -117,12 +117,13 @@
     (add-to-list 'grep-find-ignored-files "*.class")))
 
 ;; Default to unified diffs
-(setq diff-switches "-u -w")
+(setq diff-switches "-u -w"
+      magit-diff-options "-w")
 
 ;; Cosmetics
 
-;; (set-face-background 'vertical-border "white")
-;; (set-face-foreground 'vertical-border "white")
+(set-face-background 'vertical-border "white")
+(set-face-foreground 'vertical-border "white")
 
 (eval-after-load 'diff-mode
   '(progn
@@ -132,7 +133,9 @@
 (eval-after-load 'magit
   '(progn
      (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red3")))
+     (set-face-foreground 'magit-diff-del "red3")
+     (when (not window-system)
+       (set-face-background 'magit-item-highlight "white"))))
 
 (eval-after-load 'mumamo
   '(eval-after-load 'zenburn

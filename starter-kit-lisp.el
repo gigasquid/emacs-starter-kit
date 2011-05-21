@@ -40,6 +40,8 @@
   (interactive)
   (message "Deprecated in favour of M-x swank-clojure-project. Install swank-clojure from ELPA."))
 
+(require 'highlight-parentheses)
+
 ;;; Enhance Lisp Modes
 
 (eval-after-load 'paredit
@@ -54,6 +56,8 @@
   (add-hook
    (intern (concat (symbol-name x) "-mode-hook")) 'turn-on-paredit)
   (add-hook
+       (intern (concat (symbol-name x) "-mode-hook")) 'highlight-parentheses-mode)
+  (add-hook
    (intern (concat (symbol-name x) "-mode-hook")) 'run-coding-hook))
 
 (eval-after-load 'clojure-mode
@@ -65,11 +69,13 @@
 
 (eval-after-load 'slime
   '(define-key slime-mode-map (kbd "C-c p")
-     'slime-pprint-eval-last-expression))
+     'slime-pprint-eval-last-expression)
+ )
 
 (eval-after-load 'slime-repl
   '(define-key slime-repl-mode-map (kbd "C-c p")
      'slime-pprint-eval-last-expression))
 
+;;(slime-setup '(slime-rep))a
 (provide 'starter-kit-lisp)
 ;; starter-kit-lisp.el ends here

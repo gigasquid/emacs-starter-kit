@@ -31,7 +31,7 @@
 (setq custom-file (concat dotfiles-dir "custom.el"))
 
 (require 'package)
-(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
+(dolist (source '(("technomancy" . "http://repo.technomancy.us/emacs/")
                   ("elpa" . "http://tromey.com/elpa/")))
   (add-to-list 'package-archives source t))
 (package-initialize)
@@ -61,6 +61,7 @@
 (require 'starter-kit-perl)
 (require 'starter-kit-ruby)
 (require 'starter-kit-js)
+(require 'mode-compile)
 
 (regen-autoloads)
 (load custom-file 'noerror)
