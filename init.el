@@ -25,6 +25,7 @@
 (add-to-list 'load-path dotfiles-dir)
 
 (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
+(add-to-list 'load-path (concat dotfiles-dir "/misc/coffee-mode"))
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq package-user-dir (concat dotfiles-dir "elpa"))
@@ -62,6 +63,11 @@
 (require 'starter-kit-ruby)
 (require 'starter-kit-js)
 (require 'mode-compile)
+
+;; misc
+(require 'coffee-mode)
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 
 (regen-autoloads)
 (load custom-file 'noerror)
