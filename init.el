@@ -26,6 +26,7 @@
 
 (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
 (add-to-list 'load-path (concat dotfiles-dir "/misc/coffee-mode"))
+(add-to-list 'load-path (concat dotfiles-dir "/misc"))
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq package-user-dir (concat dotfiles-dir "elpa"))
@@ -65,12 +66,23 @@
 (require 'mode-compile)
 
 ;; misc
+(require 'project-grep)
 (require 'coffee-mode)
+(require 'ruby-test)
+(global-set-key (kbd "C-c tf") 'ruby-test-file)
+(global-set-key (kbd "C-c tm") 'ruby-test-function)
+(global-set-key (kbd "A-F") 'project-grep)
+
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 (defun coffee-custom ()
   "coffee-mode-hook"
  (set (make-local-variable 'tab-width) 2))
+
+(defun set-exec-path-from-shell-PATH ()
+    (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
+          (setenv "PATH" path-from-shell)
+              (setq exec-path (split-string path-from-shell path-separator))))
 
 (add-hook 'coffee-mode-hook
   '(lambda() (coffee-custom)))
